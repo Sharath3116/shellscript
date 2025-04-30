@@ -29,11 +29,16 @@ else
 fi
 cp mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
 
-dnf install mangodb-org -y &>> $LOGFILE
+VALIDATE $? "Copied mongodb repo" 
 
-VALIDATE $? &>> $LOGFILE
+dnf install mongodb-org -y &>> $LOGFILE
 
-systemctl enable mongod &>> $LOGFILE
+VALIDATE $? "Installing Mongodb"
 
-systemctl start mongod &>> $LOGFILE
+systemctl enable mongod >> $LOGFILE
 
+VALIDATE $? "Enable mongodb"
+
+systemctl start mongod >> $LOGFILE
+
+VALIDATE $? "start mongdb"
