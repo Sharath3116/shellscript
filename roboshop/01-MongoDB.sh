@@ -47,3 +47,7 @@ sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf &>> $LOGFILE
 
 VALIDATE $? "verify ports"
 
+systemctl restart mongod &>> $LOGFILE
+
+VALIDATE $? "verify service restart"
+
