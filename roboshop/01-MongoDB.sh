@@ -27,5 +27,13 @@ then
 else
     echo -e "Your running with $G root user $N"
 fi
-
 cp mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
+
+dnf install mangodb-org -y &>> $LOGFILE
+
+VALIDATE $? &>> $LOGFILE
+
+systemctl enable mongod &>> $LOGFILE
+
+systemctl start mongod &>> $LOGFILE
+
