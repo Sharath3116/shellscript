@@ -38,8 +38,7 @@ dnf install nodejs -y &>> $LOGFILE
     VALIDATE $? "Packange install nodejs"
 
 useradd roboshop &>> $LOGFILE
-    VALIDATE $? "SystemAccount roboshop add status"
-
+    
 mkdir /app &>> $LOGFILE
     VALIDATE $? "/app Folder Creation"
 
