@@ -37,8 +37,15 @@ dnf module enable nodejs:18 -y &>> $LOGFILE
 dnf install nodejs -y &>> $LOGFILE
     VALIDATE $? "Packange install nodejs"
 
-useradd roboshop &>> $LOGFILE
-    
+id roboshop
+
+   if [ $? -ne 0 ] 
+    then 
+        useradd roboshop
+        VALIDATE $? "roboshop user creation"
+    else
+        echo -e "User all ready$Y exist$N"
+    fi
 mkdir /app &>> $LOGFILE
     VALIDATE $? "/app Folder Creation"
 
