@@ -41,12 +41,12 @@ id roboshop
 
    if [ $? -ne 0 ] 
     then 
-        useradd roboshop
+        useradd roboshop &>> $LOGFILE
         VALIDATE $? "roboshop user creation"
     else
         echo -e "User all ready$Y exist$N"
     fi
-mkdir /app &>> $LOGFILE
+mkdir -p /app &>> $LOGFILE
     VALIDATE $? "/app Folder Creation"
 
 curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>> $LOGFILE
