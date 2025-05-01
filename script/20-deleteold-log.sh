@@ -13,7 +13,7 @@ then
     exit 1
 fi
 
-Files_to_delete=$(find $DIRECTORY -mtime +14 -name "*.log")
+Files_to_delete=$(find $DIRECTORY -type f -mtime +14 -name "*.log")
 
 while IFS= read -r line
 do
