@@ -55,7 +55,7 @@ curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zi
 cd /app 
     VALIDATE $? "Directory Entry"
  
-unzip /tmp/catalogue.zip &>> $LOGFILE
+unzip -o /tmp/catalogue.zip &>> $LOGFILE
     VALIDATE $? "Package unzip status"
 
 cd /app
@@ -64,7 +64,7 @@ cd /app
 npm install &>> $LOGFILE
     VALIDATE $? "npm install status"
 
-cp /home/centos/roboshop-shell/catalogue.service /etc/systemd/system/catalogue.service &>> $LOGFILE
+cp /home/centos/shellscript/roboshop/catalogue.service /etc/systemd/system/catalogue.service &>> $LOGFILE
     VALIDATE $? "File Copy Status"
 
 systemctl daemon-reload &>> $LOGFILE
@@ -76,7 +76,7 @@ systemctl enable catalogue &>> $LOGFILE
 systemctl start catalogue &>> $LOGFILE
     VALIDATE $? "Catalogue Service Start Status"
 
-cp /home/centos/roboshop-shel/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
+cp /home/centos/shellscript/roboshop/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
     VALIDATE $? "CopCopying mongodb repo" 
 
 dnf install mongodb-org-shell -y &>> $LOGFILE
