@@ -12,11 +12,11 @@ then
     echo -e "$R Directory does not exist$N"
     exit 1
 
-Files_to_delete=$(find $Directory -type f -mtime -14 -name "*.log")
+Files_to_delete=$(find $Directory -type f -mtime +14 -name "*.log")
 
 while IFS= read -r line
 do
 
-    echo -e "$R deleting log $Files_to_delete $N"
+    echo -e "$R deleting log $line $N"
 
 done <<< $Files_to_delete
