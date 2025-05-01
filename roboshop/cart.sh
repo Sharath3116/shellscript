@@ -8,8 +8,8 @@ N="\e[0m"
 Y="\e[33m"
 
 TIMESTAMP=$(date +%F-%H-%M-%S)
-LOGFILE="/tmp/$0-$TIMESTAMP.log"
-    echo -e "Starting the Script $TIMESTAMP" &>> $LOGFILE
+LOG_FILE="/tmp/$0-$TIMESTAMP.log"
+    echo -e "Starting the Script $TIMESTAMP" &>> $LOG_FILE
 VALIDATE (){
              if [ $1 -ne 0 ]
             then 
@@ -41,7 +41,7 @@ dnf install nodejs -y &>> $LOG_FILE
 VALIDATE $? "Nodejs installation status"
 
 id roboshop
-    if [ &? -ne 0 ]
+    if [ $? -ne 0 ]
     then
         useradd roboshop &>> $LOG_FILE
         VALIDATE $? "User Creation status"
@@ -54,7 +54,7 @@ mkdir -p /app &>> $LOG_FILE
 curl -L -o /tmp/cart.zip https://roboshop-builds.s3.amazonaws.com/cart.zip &>> $LOG_FILE
         VALIDATE $? "Download the application code to created app directory."
 
-d /app 
+cd /app 
     VALIDATE $? "Directory Entry"
  
 unzip -o /tmp/cart.zip &>> $LOGFILE
