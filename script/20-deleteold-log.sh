@@ -1,6 +1,6 @@
 #!bin/bash
 
-DIRECTORY="/log/test-log"
+DIRECTORY="/log/testsclog"
 
 R='\e[31m'
 G='\e[32m'
