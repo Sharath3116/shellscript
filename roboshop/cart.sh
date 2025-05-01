@@ -45,7 +45,7 @@ id roboshop
     then
         useradd roboshop &>> $LOG_FILE
         VALIDATE $? "User Creation status"
-    else
+    else 
         echo -e "User allraedy exists $Y SKIPING $N"
 
 mkdir -p /app &>> $LOG_FILE
