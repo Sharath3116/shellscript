@@ -10,8 +10,9 @@ N='\e[0m'
 if [ ! -d $DIRECTORY ]
 then    
     echo -e "$R Directory does not exist$N"
+    exit 1
 
-Files_to_delete=$(find $Directory -type f -time -14 -name "*.log")
+Files_to_delete=$(find $Directory -type f -mtime -14 -name "*.log")
 
 while IFS= read -r line
 do
