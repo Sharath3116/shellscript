@@ -1,6 +1,6 @@
 #!bin/bash
 
-DIRECTORY="/etc/dnf"
+DIRECTORY="/tmp/shellcri/"
 
 R='\e[31m'
 G='\e[32m'
@@ -10,6 +10,13 @@ N='\e[0m'
 if [ ! -d $DIRECTORY ]
 then    
     echo -e "$R Directory does not exist$N"
-else   
-    echo -e "$G Directory exists$N"
-fi
+
+Files_to_delete=$(find $Directory -type f -time -14 -name "*.log")
+
+while IFS= read -r line
+do
+
+    echo -e "$R deleting logs$N"
+done
+
+
