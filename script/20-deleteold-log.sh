@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 DIRECTORY="/tmp/shellcri/"
 
@@ -11,6 +11,7 @@ if [ ! -d $DIRECTORY ]
 then    
     echo -e "$R Directory does not exist$N"
     exit 1
+fi
 
 Files_to_delete=$(find $Directory -type f -mtime +14 -name "*.log")
 
