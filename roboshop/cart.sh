@@ -47,6 +47,7 @@ id roboshop
         VALIDATE $? "User Creation status"
     else 
         echo -e "User allraedy exists $Y SKIPING $N"
+        fi
 
 mkdir -p /app &>> $LOG_FILE
     VALIDATE $? "Directory Creation"
