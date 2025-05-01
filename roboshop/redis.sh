@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#colour code
 ID=$(id -u)
 R="\e[31m"
 G="\e[32m"
@@ -28,27 +27,20 @@ else
     echo -e "Your running with $G root user $N"
 fi
 
-cp mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
+dnf install redis -y &>> $LOGFILE
 
-VALIDATE $? "Copied mongodb repo" 
+VALIDATE $? "Redis installation"
 
-dnf install mongodb-org -y &>> $LOGFILE
+sed -i 's/127.0.0.1/0.0.0.0/g' /ect/redis.redis.conf &>> $LOGFILE
 
-VALIDATE $? "Installing Mongodb"
+VALIDATE $? "Verify Ports"
 
-systemctl enable mongod >> $LOGFILE
+systemctl enable redis
 
-VALIDATE $? "Enable mongodb"
+VALIDATE $? "Enabling redis applicatation"
 
-systemctl start mongod >> $LOGFILE
+systemctl start redis
 
-VALIDATE $? "start mongdb"
+VALIDATE $? "Starting redis service"
 
-sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf &>> $LOGFILE
-
-VALIDATE $? "verify ports"
-
-systemctl restart mongod &>> $LOGFILE
-
-VALIDATE $? "verify service restart"
 

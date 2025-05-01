@@ -31,8 +31,8 @@ fi
 dnf module disable nodejs -y &>> $LOGFILE
     VALIDATE $? "Disable NodeJS Old version"
 
-dnf module enable nodejs:18 -y &>> $LOGFILE
-    VALIDATE $? "Enable Noeja Version 18"
+dnf module enable nodejs:20 -y &>> $LOGFILE
+    VALIDATE $? "Enable Noeja Version 20"
 
 dnf install nodejs -y &>> $LOGFILE
     VALIDATE $? "Packange install nodejs"
@@ -64,7 +64,7 @@ cd /app
 npm install &>> $LOGFILE
     VALIDATE $? "npm install status"
 
-cp /home/centos/shellscript/roboshop/catalogue.service /etc/systemd/system/catalogue.service &>> $LOGFILE
+cp /home/ec2-user/shellscript/roboshop/catalogue.service /etc/systemd/system/catalogue.service &>> $LOGFILE
     VALIDATE $? "File Copy Status"
 
 systemctl daemon-reload &>> $LOGFILE
@@ -76,14 +76,12 @@ systemctl enable catalogue &>> $LOGFILE
 systemctl start catalogue &>> $LOGFILE
     VALIDATE $? "Catalogue Service Start Status"
 
-cp /home/centos/shellscript/roboshop/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
+cp /home/ec2-user/shellscript/roboshop/mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
     VALIDATE $? "CopCopying mongodb repo" 
 
-dnf install mongodb-org-shell -y &>> $LOGFILE
+dnf install -y mongodb-mongosh  &>> $LOGFILE
     VALIDATE $? "mongod shell install"
 
-mongo --host mongodb.olavu.in </app/schema/catalogue.js &>> $LOGFILE
+mongosh --host mongodb.olavu.in </app/schema/catalogue.js &>> $LOGFILE
      VALIDATE $? "Loading Catalogue data to MongoDB"
-
-
 

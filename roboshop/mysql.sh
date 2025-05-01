@@ -28,27 +28,16 @@ else
     echo -e "Your running with $G root user $N"
 fi
 
-cp mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
+dnf install mysql -y &>> $LOGFILE
 
-VALIDATE $? "Copied mongodb repo" 
+VALIDATE $? "mysql installation"
 
-dnf install mongodb-org -y &>> $LOGFILE
+systemctl enable mysqld &>> $LOGFILE
+VALIDATE $? "enable mysqld"
 
-VALIDATE $? "Installing Mongodb"
+systemctl start mysql   &>> $LOGFILE
+VALIDATE $? "mysql service start"   
 
-systemctl enable mongod >> $LOGFILE
-
-VALIDATE $? "Enable mongodb"
-
-systemctl start mongod >> $LOGFILE
-
-VALIDATE $? "start mongdb"
-
-sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf &>> $LOGFILE
-
-VALIDATE $? "verify ports"
-
-systemctl restart mongod &>> $LOGFILE
-
-VALIDATE $? "verify service restart"
+mysql_secure_installation --set-root-pass RoboShop@1    &>> $LOGFILE
+VALIDATE $? "test mysql db connection"
 
