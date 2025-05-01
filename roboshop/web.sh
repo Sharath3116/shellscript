@@ -32,20 +32,27 @@ fi
 dnf install nginx  -y &>> $LOG_FILE
 VALIDATE $? "nginx installation status"
 
-systemctl enable nginx
+systemctl enable nginx &>> $LOG_FILE
+VALIDATE $? "enable nginx"
 
-systemctl start nginx
+systemctl start nginx &>> $LOG_FILE
+VALIDATE $? "nginx installation status"
 
-rm -rf /usr/share/nginx/html/*
+rm -rf /usr/share/nginx/html/* &>> $LOG_FILE
+VALIDATE $? "Remove the default content that web server is serving."
 
-curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip
+curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip &>> $LOG_FILE
+VALIDATE $? "Download the frontend content"
 
-cd /usr/share/nginx/html
+cd /usr/share/nginx/html &>> $LOG_FILE
+VALIDATE $? "Extract the frontend content" 
 
-unzip /tmp/web.zip
+unzip -o /tmp/web.zip &>> $LOG_FILE
+VALIDATE $? "unzip files"
 
-vim /etc/nginx/default.d/roboshop.conf 
+cp home/ec2-user/shellscript/roboshop/roboshop.conf /etc/nginx/default.d/roboshop.conf &>> $LOG_FILE
+VALIDATE $? "Copied ngnix revers proxcy config"
 
-vim /etc/nginx/default.d/roboshop.conf 
 
-systemctl restart nginx 
+systemctl restart nginx &>> $LOG_FILE
+VALIDATE $? "nginx service restart"
