@@ -18,5 +18,3 @@ do
 
     echo -e "$R deleting logs$N"
 done
-
-
