@@ -75,4 +75,4 @@ mysql -h mysql.olavu.in -uroot -pRoboShop@1 < /app/db/app-user.sql
 mysql -h mysql.olavu.in -uroot -pRoboShop@1 < /app/db/master-data.sql
 
 systemctl restart shipping &>> $LOGFILE
-VALIDATE $? "Restarting shipping service"
+    VALIDATE $? "Restarting shipping service"

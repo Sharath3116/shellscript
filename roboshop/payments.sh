@@ -29,4 +29,4 @@ else
 fi
 
 dnf install python3.11 gcc python3-devel -y &>> $LOGFILE
-    VALIDATE $? "rabbitmq package install"
+    VALIDATE $? "python package install"
